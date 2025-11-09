@@ -1,16 +1,26 @@
 package main
 
 import (
-	"MapGenerator/PerlinNoise"
-	"fmt"
+	"MapGenerator/MatrixTools"
+	perlin "MapGenerator/PerlinNoise"
 )
 
 func main() {
-	matrix := perlin.NoiseMatrix(5, 5, 0)
-	for i := 0; i < len(matrix); i++ {
-		for j := 0; j < len(matrix[i]); j++ {
-			fmt.Print(matrix[i][j], " ")
+	n, m := 512, 512
+	matrix := make([][]float64, n)
+	for i := 0; i < n; i++ {
+		matrix[i] = make([]float64, m)
+		for j := 0; j < m; j++ {
+			matrix[i][j] = 0.
 		}
-		fmt.Println()
 	}
+	scale := 256.
+	k := 1.0
+	for scale > 1. {
+		matrix = MatrixTools.AddMatrix(matrix, MatrixTools.MultScalar(perlin.NoiseMatrix(n, m, scale, 0), k))
+		k /= 1.5
+		scale /= 2.
+	}
+	
+	MatrixTools.ToIMG(matrix, "perlin.png")
 }
