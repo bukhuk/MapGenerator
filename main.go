@@ -3,13 +3,16 @@ package main
 import (
 	"MapGenerator/MatrixTools"
 	perlin "MapGenerator/PerlinNoise"
+	"fmt"
 	"math"
+	"time"
 )
 
 func main() {
+	start := time.Now()
 	n, m := 512, 512
 	matrix := make([][]float64, n)
-	steps := 16
+	steps := 128
 	for i := 0; i < n; i++ {
 		matrix[i] = make([]float64, m)
 		for j := 0; j < m; j++ {
@@ -28,7 +31,7 @@ func main() {
 
 	matrix = MatrixTools.Norm(matrix)
 
-	matrix = MatrixTools.Pow(matrix, 1.3)
+	matrix = MatrixTools.Pow(matrix, 1.2)
 
 	for i := 0; i < n; i++ {
 		for j := 0; j < m; j++ {
@@ -36,9 +39,12 @@ func main() {
 		}
 	}
 
-	matrix = MatrixTools.ThermalErosion(matrix, 100, 0.05, 0.1)
+	matrix = MatrixTools.ThermalErosion(matrix, 16, 0.02, 0.5)
 
-	//matrix = MatrixTools.BoxBlur(matrix, 2)
+	matrix = MatrixTools.BoxBlur(matrix, 2)
 
 	MatrixTools.ToIMG(matrix, "perlin.png")
+	MatrixTools.ToOBJ(MatrixTools.Map(matrix, 4, 80), "map.obj")
+	duration := time.Since(start)
+	fmt.Printf("Time elapsed: %s\n", duration)
 }
