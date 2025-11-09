@@ -29,10 +29,10 @@ func lerp(a, b, t float64) float64 {
 }
 
 var direction = [8][2]float64{
-	{1, 1},
-	{-1, 1},
-	{1, -1},
-	{-1, -1},
+	{1 / math.Sqrt2, 1 / math.Sqrt2},
+	{-1 / math.Sqrt2, 1 / math.Sqrt2},
+	{1 / math.Sqrt2, -1 / math.Sqrt2},
+	{-1 / math.Sqrt2, -1 / math.Sqrt2},
 	{1, 0},
 	{0, 1},
 	{-1, 0},
@@ -69,10 +69,10 @@ func main() {
 	if seed == 0 {
 		seed = rand.Int()
 	}
-	w, h := 512, 512
+	w, h := 1024, 1024
 	img := image.NewGray(image.Rect(0, 0, w, h))
 	perm := RandomPermutation(int64(seed))
-	scale := 50.0
+	scale := 100.0
 	for i := 0; i < w; i++ {
 		for j := 0; j < h; j++ {
 			h := Noise(float64(i)/scale, float64(j)/scale, perm)
