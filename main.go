@@ -10,7 +10,7 @@ import (
 
 func main() {
 	start := time.Now()
-	n, m := 512, 512
+	n, m := 256, 256
 	matrix := make([][]float64, n)
 	steps := 128
 	for i := 0; i < n; i++ {
@@ -44,7 +44,7 @@ func main() {
 	matrix = MatrixTools.BoxBlur(matrix, 2)
 
 	MatrixTools.ToIMG(matrix, "perlin.png")
-	MatrixTools.ToOBJ(MatrixTools.Map(matrix, 4, 80), "map.obj")
+	MatrixTools.ToOBJ(MatrixTools.Map(matrix, 4, 64), "map.obj")
 	duration := time.Since(start)
 	fmt.Printf("Time elapsed: %s\n", duration)
 }
