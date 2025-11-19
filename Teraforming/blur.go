@@ -1,6 +1,6 @@
-package MatrixTools
+package Teraforming
 
-func (cur *Matrix) BoxBlur(passes int) {
+func (cur *Map) Blur(passes int) {
 	for step := 0; step < passes; step++ {
 		for i := 0; i < cur.N; i++ {
 			for j := 0; j < cur.M; j++ {

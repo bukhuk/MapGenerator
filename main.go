@@ -3,6 +3,7 @@ package main
 import (
 	"MapGenerator/MatrixTools"
 	perlin "MapGenerator/PerlinNoise"
+	"MapGenerator/Teraforming"
 	"MapGenerator/Visualization"
 	"fmt"
 	"math"
@@ -12,7 +13,7 @@ import (
 func main() {
 	start := time.Now()
 
-	n, m := 256, 512
+	n, m := 256, 256
 	matrix := MatrixTools.Make(n, m, 0)
 	steps := 128
 
@@ -36,12 +37,12 @@ func main() {
 		}
 	}
 
-	matrix.ThermalErosion(16, 0.02, 0.5)
-	matrix.BoxBlur(2)
+	Map := Teraforming.Make(matrix)
 
-	Visualization.MakeIMG(matrix, "perlin.png")
+	Map.ThermalErosion(16, 0.02, 0.5)
+	Map.Blur(2)
 
-	matrix.Map(4, 64)
+	Map.HighRange(4, 64)
 
 	Visualization.MakeOBJ(matrix, "map.obj")
 

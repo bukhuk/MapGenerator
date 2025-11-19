@@ -1,8 +1,8 @@
-package MatrixTools
+package Teraforming
 
 import "math"
 
-func (cur *Matrix) ThermalErosion(passes int, talus, k float64) {
+func (cur *Map) ThermalErosion(passes int, talus, k float64) {
 	for step := 0; step < passes; step++ {
 		for i := 0; i < cur.N; i++ {
 			for j := 0; j < cur.M; j++ {
