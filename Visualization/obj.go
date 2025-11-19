@@ -1,12 +1,12 @@
 package Visualization
 
 import (
-	"MapGenerator/MatrixTools"
+	"MapGenerator/Teraforming"
 	"fmt"
 	"os"
 )
 
-func MakeOBJ(matrix MatrixTools.Matrix, path string) {
+func MakeOBJ(matrix Teraforming.Map, path string) {
 	f, _ := os.Create(path)
 	defer f.Close()
 
