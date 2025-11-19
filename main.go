@@ -3,6 +3,7 @@ package main
 import (
 	"MapGenerator/MatrixTools"
 	perlin "MapGenerator/PerlinNoise"
+	"MapGenerator/Visualization"
 	"fmt"
 	"math"
 	"time"
@@ -10,41 +11,40 @@ import (
 
 func main() {
 	start := time.Now()
+
 	n, m := 256, 256
-	matrix := make([][]float64, n)
+	matrix := MatrixTools.Make(n, m, 0)
 	steps := 128
-	for i := 0; i < n; i++ {
-		matrix[i] = make([]float64, m)
-		for j := 0; j < m; j++ {
-			matrix[i][j] = 0.
-		}
-	}
 
 	scale := 256.
 	k := 1.0
 
 	for scale > 1. {
-		matrix = MatrixTools.AddMatrix(matrix, MatrixTools.MultScalar(perlin.NoiseMatrix(n, m, scale, 0), k))
+		p := perlin.NoiseMatrix(n, m, scale, 0)
+		p.MultScalar(k)
+		matrix.AddMatrix(p)
 		k /= 1.5
 		scale /= 2.
 	}
 
-	matrix = MatrixTools.Norm(matrix)
-
-	matrix = MatrixTools.Pow(matrix, 1.2)
+	matrix.Norm()
+	matrix.Pow(1.2)
 
 	for i := 0; i < n; i++ {
 		for j := 0; j < m; j++ {
-			matrix[i][j] = math.Round(matrix[i][j]*float64(steps)) / float64(steps)
+			matrix.A[i][j] = math.Round(matrix.A[i][j]*float64(steps)) / float64(steps)
 		}
 	}
 
-	matrix = MatrixTools.ThermalErosion(matrix, 16, 0.02, 0.5)
+	matrix.ThermalErosion(16, 0.02, 0.5)
+	matrix.BoxBlur(2)
 
-	matrix = MatrixTools.BoxBlur(matrix, 2)
+	Visualization.MakeIMG(matrix, "perlin.png")
 
-	MatrixTools.ToIMG(matrix, "perlin.png")
-	MatrixTools.ToOBJ(MatrixTools.Map(matrix, 4, 64), "map.obj")
+	matrix.Map(4, 64)
+
+	Visualization.MakeOBJ(matrix, "map.obj")
+
 	duration := time.Since(start)
 	fmt.Printf("Time elapsed: %s\n", duration)
 }
