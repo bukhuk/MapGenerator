@@ -12,7 +12,7 @@ import (
 func main() {
 	start := time.Now()
 
-	n, m := 256, 256
+	n, m := 256, 512
 	matrix := MatrixTools.Make(n, m, 0)
 	steps := 128
 

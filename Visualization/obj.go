@@ -38,10 +38,10 @@ func MakeOBJ(matrix MatrixTools.Matrix, path string) {
 	fmt.Fprintln(f)
 	for i := 0; i < matrix.N-1; i++ {
 		for j := 0; j < matrix.M-1; j++ {
-			v00 := i*matrix.N + j + 1
-			v01 := i*matrix.N + j + 2
-			v10 := (i+1)*matrix.N + j + 1
-			v11 := (i+1)*matrix.N + j + 2
+			v00 := i*matrix.M + j + 1
+			v01 := i*matrix.M + j + 2
+			v10 := (i+1)*matrix.M + j + 1
+			v11 := (i+1)*matrix.M + j + 2
 			fmt.Fprintln(f, "f", v00, v01, v11)
 			fmt.Fprintln(f, "f", v00, v10, v11)
 		}
@@ -82,6 +82,6 @@ func MakeOBJ(matrix MatrixTools.Matrix, path string) {
 		fmt.Fprintln(f, "f", v00, v01, v11)
 		fmt.Fprintln(f, "f", v00, v10, v11)
 	}
-	fmt.Fprintln(f, "f", mapPoints+1, mapPoints+matrix.N, mapPoints+2*matrix.N+2*matrix.N)
+	fmt.Fprintln(f, "f", mapPoints+1, mapPoints+matrix.N, mapPoints+2*matrix.N+2*matrix.M)
 	fmt.Fprintln(f, "f", mapPoints+1, mapPoints+2*matrix.N+matrix.M, mapPoints+2*matrix.N+2*matrix.M)
 }
