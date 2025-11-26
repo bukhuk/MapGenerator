@@ -11,7 +11,7 @@ func Generate(n, m, seed int) {
 
 	matrix := MatrixTools.Make(n, m, 0)
 
-	scale := 256.
+	scale := 128.
 	k := 1.0
 
 	for scale > 1. {
@@ -30,7 +30,7 @@ func Generate(n, m, seed int) {
 	Map.ThermalErosion(16, 0.02, 0.5)
 	Map.Blur(2)
 
-	Map.HighRange(4, 64)
+	Map.HighRange(4, 32)
 
 	Visualization.MakeOBJ(Map, "map.obj")
 }

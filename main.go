@@ -1,4 +1,4 @@
-package main
+package mapgenerator
 
 import (
 	"MapGenerator/Generation"
