@@ -4,7 +4,7 @@ Procedural map generator written in Go.
 
 This project contains a set of modules for generating heightmaps and
 visualizing them using noise functions (Perlin noise) and
-terrain--modification operations (terraforming). It is suitable for
+terrain-modification operations (terraforming). It is suitable for
 experimenting with landscape generation, creating tile maps, or as an
 educational example of a modular generator architecture.
 
@@ -39,15 +39,15 @@ educational example of a modular generator architecture.
 
 ```
 
--   `main.go` --- application entry point.
--   `Generation/` --- logic for combining generation steps.
--   `MatrixTools/` --- utilities for matrix operations (map represented
+-   `main.go` - application entry point.
+-   `Generation/` - logic for combining generation steps.
+-   `MatrixTools/` - utilities for matrix operations (map represented
     as matrix).
--   `PerlinNoise/` --- implementation/wrappers for noise functions
+-   `PerlinNoise/` - implementation/wrappers for noise functions
     (Perlin, etc.).
--   `Teraforming/` --- terrain transformation operations (smoothing,
+-   `Teraforming/` - terrain transformation operations (smoothing,
     normalization, randomization, etc.).
--   `Visualization/` --- tools for rendering/exporting results.
+-   `Visualization/` - tools for rendering/exporting results.
 
 ------------------------------------------------------------------------
 
